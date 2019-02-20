@@ -1,11 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
 
 const app = express();
+
+//Body parser middleware. It is used to extract the data out of the the request headers like the form data. Four different parser types: JSON, raw, Text, URL-encoded
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Configure the database
 const db = require("./config/keys").mongoURI;
