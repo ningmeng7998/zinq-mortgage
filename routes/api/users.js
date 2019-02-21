@@ -4,6 +4,13 @@ const express = require("express");
 const router = express.Router();
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys");
+const passport = require("passport");
+
+//Load input validation
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
 
 //Load user model
 const User = require("../../models/User");
@@ -20,16 +27,24 @@ router.get("/test", (req, res) => res.json({ msg: "users route works" }));
 //@access Public
 //The full URL would be http://localhost:5000/api/users/register
 router.post("/register", (req, res) => {
+  //use distructor to pull out the information in the request body
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   //Use mongoose to first find if the user has already existed in the database
   //findOne()
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ email: "Email already exists" });
+      errors.email = "Email already exists";
+      return res.status(400).json(errors);
     } else {
       const avatar = gravatar.url(req.body.email, {
         s: "200", // Size
-        r: "pg", //Rating
-        d: "mm" //Default
+        r: "pg", // Rating
+        d: "mm" // Default
       });
 
       const newUser = new User({
@@ -43,7 +58,6 @@ router.post("/register", (req, res) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          //save() returns a promise
           newUser
             .save()
             .then(user => res.json(user))
@@ -53,5 +67,74 @@ router.post("/register", (req, res) => {
     }
   });
 });
+
+//@route GET api/users/login
+//@Desc Login user / Returning JWT Token
+//@access Public
+router.post("/login", (req, res) => {
+  //use distructor to pull out the information in the request body
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // The first email is the attribution name from database, the second email is the const email which is the email from the user input
+  //find user by email
+  User.findOne({ email: email }).then(user => {
+    //Check for user
+    if (!user) {
+      errors.email = "user not found";
+      return res.status(404).json(errors);
+    }
+
+    //Check for password
+    //The first password is from the request body, the second password is from the database
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        //user matched
+        const payload = { id: user.id, name: user.name, avatar: user.avatar };
+
+        //Sign in token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          { expiresIn: 3600 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        errors.password = "password incorrect";
+        return res.status(400).json(errors);
+      }
+    });
+  });
+});
+
+//@route GET api/users/current
+//@Desc Return the current user
+//@access Private
+//passport.authenticate() is a middleware function, which specifies jwt as the strategy which is created in the passport.js
+//We treat is like a normal route, except it is protected
+// @route   GET api/users/current
+// @desc    Return current user
+// @access  Private
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    });
+  }
+);
 
 module.exports = router;

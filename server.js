@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
@@ -21,8 +22,14 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
-//set a simple route. Put the route in a different folder. Now it is for testing purpose
+//set a simple route. Later will put the route in a different folder. Now it is for testing purpose
 app.get("/", (req, res) => res.send("Hello"));
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require("./config/passport")(passport);
 
 //Use routes
 //We want /api/users to go to users
