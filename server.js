@@ -24,7 +24,7 @@ mongoose
   .catch(err => console.log(err));
 
 //set a simple route. Later will put the route in a different folder. Now it is for testing purpose
-app.get("/", (req, res) => res.send("Hello"));
+//app.get("/", (req, res) => res.send("Hello"));
 
 // Passport middleware
 app.use(passport.initialize());
