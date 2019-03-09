@@ -6,6 +6,7 @@ const passport = require("passport");
 //Load post model
 const Post = require("../../models/Post");
 
+//load profile model
 const Profile = require("../../models/Profile");
 
 //Validation
@@ -61,13 +62,13 @@ router.post(
 );
 
 // @route   DELETE api/posts/:id
-// @desc    Delete post
+// @desc    Delete post by post id
 // @access  Private
 router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    //first need to check if the user is the owner of the post
+    //first need to make sure the user is the owner of the post
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
