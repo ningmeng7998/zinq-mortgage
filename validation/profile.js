@@ -35,12 +35,11 @@ module.exports = function validateProfileInput(data) {
     errors.expenses = "Your expenses is required";
   } else if (isNaN(data.expenses)) {
     errors.expenses = "Your expenses should be a number";
+  } else if (isNaN(data.partnerIncome)) {
+    errors.partnerIncome = "Partner income should be a number";
+  } else if (isNaN(data.partnerExpenses)) {
+    errors.partnerExpenses = "Partner expenses should be a number";
   }
-  // else if (!isEmpty(data.partnerIncome) && isNaN(data.partnerIncome)) {
-  //   errors.partnerIncome = "Partner income should be a number";
-  // } else if (!isEmpty(data.partnerExpenses) && isNaN(data.partnerExpenses)) {
-  //   errors.partnerExpenses = "Partner expenses should be a number";
-  // }
 
   return {
     errors,

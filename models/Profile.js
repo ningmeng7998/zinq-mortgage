@@ -27,10 +27,12 @@ const ProfileSchema = new Schema({
     type: Date
   },
   income: {
-    type: String
+    type: String,
+    required: true
   },
   expenses: {
-    type: String
+    type: String,
+    required: true
   },
   estimatedResult: {
     type: Boolean

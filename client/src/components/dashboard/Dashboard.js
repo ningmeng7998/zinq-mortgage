@@ -10,43 +10,12 @@ import Education from "./Education";
 import Calculator from "./Calculator";
 
 class Dashboard extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.calculateDepositToPropertyValueRatio = this.calculateDepositToPropertyValueRatio.bind(
-  //     this
-  //   );
-  //   this.calculateExpenseToIncomeRatio = this.calculateExpenseToIncomeRatio.bind(
-  //     this
-  //   );
-  //   this.findResult = this.findResult.bind(this);
-  // }
   componentDidMount() {
     this.props.getCurrentProfile();
   }
   onDeleteClick(e) {
     this.props.deleteAccount();
   }
-
-  // calculateExpenseToIncomeRatio(
-  //   income,
-  //   expenses,
-  //   partnerIncome,
-  //   partnerExpenses
-  // ) {
-  //   return (partnerExpenses + expenses) / (partnerIncome + income);
-  // }
-
-  // calculateDepositToPropertyValueRatio(deposit, propertyValue) {
-  //   return deposit / propertyValue;
-  // }
-
-  // findResult(x, y) {
-  //   if (x <= 0.5 && y >= 0.2) {
-  //     return "Congratulations! We can help you. ";
-  //   } else {
-  //     return "Please give us a call for further assistance. ";
-  //   }
-  // }
 
   render() {
     //Make sure profile is not an empty object before we try to render anything
@@ -69,8 +38,10 @@ class Dashboard extends Component {
             </p>
             <ProfileActions />
             <Property property={profile.property} />
-            {/* <Education education={profile.education} /> */}
-            <Calculator profile={profile} />
+            <div style={{ marginTop: "60px", marginBottom: "200px" }}>
+              <Calculator profile={profile} />
+            </div>
+
             <div style={{ marginBottom: "60px" }} />
             <button
               onClick={this.onDeleteClick.bind(this)}
@@ -117,24 +88,10 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
-//It should take a first argument called state, optionally a second argument called ownProps, and return a plain object containing the data that the connected component needs.
-
-//The first argument to a mapStateToProps function is the entire Redux store state (the same value returned by a call to store.getState()). Because of this, the first argument is traditionally just called state. (While you can give the argument any name you want, calling it store would be incorrect - it's the "state value", not the "store instance".)
 const mapStateToProps = state => ({
   profile: state.profile,
   auth: state.auth
 });
-
-// function mapStateToProps(state){
-//   return {
-//     profile: state.profile,
-//     auth: state.auth
-//   }
-// }
-
-//The connect() function connects a React component to a Redux store.
-//It provides its connected component with the pieces of the data it needs from the store, and the functions it can use to dispatch actions to the store.
-//Connect state.profile, state.auth and getCurrentProfile function to component Dashboard
 export default connect(
   mapStateToProps,
   { getCurrentProfile, deleteAccount }

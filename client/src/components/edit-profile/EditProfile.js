@@ -114,6 +114,7 @@ class CreateProfile extends Component {
             value={this.state.partnerIncome}
             onChange={this.onChange}
             info="Your partner's income"
+            error={errors.partnerIncome}
           />
 
           <TextFieldGroup
@@ -122,6 +123,7 @@ class CreateProfile extends Component {
             value={this.state.partnerExpenses}
             onChange={this.onChange}
             info="Your partner's expenses"
+            error={errors.partnerExpenses}
           />
         </div>
       );

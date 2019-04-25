@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import Moment from "react-moment";
 
 export default class Calculator extends Component {
   constructor(props) {
@@ -59,7 +56,11 @@ export default class Calculator extends Component {
     );
 
     if (profile.property.length === 0) {
-      output = <h1>Please add your property inforamtion</h1>;
+      output = (
+        <h1 style={{ color: "red" }}>
+          Oops! Please add your property information for analysis.{" "}
+        </h1>
+      );
     } else {
       profile.property.map(property => {
         propertyValue += property.propertyValue;
@@ -72,7 +73,9 @@ export default class Calculator extends Component {
 
     return (
       <div>
-        <h4 className="mb-4">Analysis Result</h4>
+        <h4 className="mb-4" style={{ color: "purple" }}>
+          Analysis Result
+        </h4>
         {output}
       </div>
     );

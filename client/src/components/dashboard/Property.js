@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-//A react component to format date
-import Moment from "react-moment";
 import { deleteProperty } from "../../actions/profileActions";
 
 class Property extends Component {
@@ -29,7 +27,9 @@ class Property extends Component {
     ));
     return (
       <div>
-        <h4 className="mb-4">Property Information</h4>
+        <h4 className="mb-4" style={{ color: "purple" }}>
+          Property Information
+        </h4>
         <table className="table">
           <thead>
             <tr>

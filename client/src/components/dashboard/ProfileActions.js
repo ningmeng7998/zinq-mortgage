@@ -8,7 +8,7 @@ function ProfileActions() {
         <i className="fas fa-user-circle text-info mr-1" /> Edit Profile
       </Link>
       <Link to="/add-property" className="btn btn-light">
-        <i className="fab fa-black-tie text-info mr-1" />
+        <i className="fa fa-home text-info mr-1" />
         Add Property
       </Link>
       {/* <Link to="/add-education" className="btn btn-light">
