@@ -6,61 +6,41 @@ module.exports = function validateProfileInput(data) {
   let errors = {};
   //Since the validator module only checks the empty string, we need to use our custormised isEmty function to convert empty-anything to an empty string
   data.handle = !isEmpty(data.handle) ? data.handle : "";
-  data.status = !isEmpty(data.status) ? data.status : "";
-  data.skills = !isEmpty(data.skills) ? data.skills : "";
-
-  if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = "Handle needs to between 2 and 40 characters";
-  }
+  data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
+  data.middleName = !isEmpty(data.middleName) ? data.middleName : "";
+  data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
+  data.dateOfBirth = !isEmpty(data.dateOfBirth) ? data.dateOfBirth : "";
+  data.income = !isEmpty(data.income) ? data.income : "";
+  data.expenses = !isEmpty(data.expenses) ? data.expenses : "";
+  data.partnerIncome = !isEmpty(data.partnerIncome) ? data.partnerIncome : "";
+  data.partnerExpenses = !isEmpty(data.partnerExpenses)
+    ? data.partnerExpenses
+    : "";
 
   if (Validator.isEmpty(data.handle)) {
-    errors.handle = "Profile handle is required";
+    errors.handle = "User name is required.";
+  } else if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
+    errors.handle = "Handle needs to between 2 and 40 characters";
+  } else if (Validator.isEmpty(data.firstName)) {
+    errors.firstName = "First Name is required ";
+  } else if (Validator.isEmpty(data.lastName)) {
+    errors.lastName = "Last Name is required ";
+  } else if (Validator.isEmpty(data.dateOfBirth)) {
+    errors.dateOfBirth = "Date Of Birth is required";
+  } else if (Validator.isEmpty(data.income)) {
+    errors.income = "Your income is required";
+  } else if (isNaN(data.income)) {
+    errors.income = "Your income should be a number";
+  } else if (Validator.isEmpty(data.expenses)) {
+    errors.expenses = "Your expenses is required";
+  } else if (isNaN(data.expenses)) {
+    errors.expenses = "Your expenses should be a number";
   }
-
-  if (Validator.isEmpty(data.status)) {
-    errors.status = "Profile status is required";
-  }
-
-  if (Validator.isEmpty(data.skills)) {
-    errors.skills = "Profile skills is required";
-  }
-
-  //Since the website is not required, we need to check if it is empty, if not, then we check if it is an URL
-  if (!isEmpty(data.website)) {
-    if (!Validator.isURL(data.website)) {
-      errors.website = "Not a valid URL";
-    }
-  }
-
-  if (!isEmpty(data.youtube)) {
-    if (!Validator.isURL(data.youtube)) {
-      errors.youtube = "Not a valid URL";
-    }
-  }
-
-  if (!isEmpty(data.twitter)) {
-    if (!Validator.isURL(data.twitter)) {
-      errors.twitter = "Not a valid URL";
-    }
-  }
-
-  if (!isEmpty(data.facebook)) {
-    if (!Validator.isURL(data.facebook)) {
-      errors.facebook = "Not a valid URL";
-    }
-  }
-
-  if (!isEmpty(data.linkedin)) {
-    if (!Validator.isURL(data.linkedin)) {
-      errors.linkedin = "Not a valid URL";
-    }
-  }
-
-  if (!isEmpty(data.instagram)) {
-    if (!Validator.isURL(data.instagram)) {
-      errors.instagram = "Not a valid URL";
-    }
-  }
+  // else if (!isEmpty(data.partnerIncome) && isNaN(data.partnerIncome)) {
+  //   errors.partnerIncome = "Partner income should be a number";
+  // } else if (!isEmpty(data.partnerExpenses) && isNaN(data.partnerExpenses)) {
+  //   errors.partnerExpenses = "Partner expenses should be a number";
+  // }
 
   return {
     errors,

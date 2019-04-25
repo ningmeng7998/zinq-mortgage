@@ -32,7 +32,9 @@ export const createProfile = (profileData, history) => dispatch => {
   axios
     .post("/api/profile", profileData)
     //redirect
-    .then(res => history.push("/dashboard"))
+    .then(res => {
+      history.push("/dashboard");
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -74,10 +76,10 @@ export const deleteAccount = () => dispatch => {
   }
 };
 
-// Add experience
-export const addExperience = (expData, history) => dispatch => {
+// Add property
+export const addProperty = (expData, history) => dispatch => {
   axios
-    .post("/api/profile/experience", expData)
+    .post("/api/profile/property", expData)
     .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
@@ -100,10 +102,10 @@ export const addEducation = (eduData, history) => dispatch => {
     );
 };
 
-// Delete Experience
-export const deleteExperience = id => dispatch => {
+// Delete Property
+export const deleteProperty = id => dispatch => {
   axios
-    .delete(`/api/profile/experience/${id}`)
+    .delete(`/api/profile/property/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,

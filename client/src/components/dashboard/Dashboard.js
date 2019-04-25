@@ -5,16 +5,48 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
-import Experience from "./Experience";
+import Property from "./Property";
 import Education from "./Education";
+import Calculator from "./Calculator";
 
 class Dashboard extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.calculateDepositToPropertyValueRatio = this.calculateDepositToPropertyValueRatio.bind(
+  //     this
+  //   );
+  //   this.calculateExpenseToIncomeRatio = this.calculateExpenseToIncomeRatio.bind(
+  //     this
+  //   );
+  //   this.findResult = this.findResult.bind(this);
+  // }
   componentDidMount() {
     this.props.getCurrentProfile();
   }
   onDeleteClick(e) {
     this.props.deleteAccount();
   }
+
+  // calculateExpenseToIncomeRatio(
+  //   income,
+  //   expenses,
+  //   partnerIncome,
+  //   partnerExpenses
+  // ) {
+  //   return (partnerExpenses + expenses) / (partnerIncome + income);
+  // }
+
+  // calculateDepositToPropertyValueRatio(deposit, propertyValue) {
+  //   return deposit / propertyValue;
+  // }
+
+  // findResult(x, y) {
+  //   if (x <= 0.5 && y >= 0.2) {
+  //     return "Congratulations! We can help you. ";
+  //   } else {
+  //     return "Please give us a call for further assistance. ";
+  //   }
+  // }
 
   render() {
     //Make sure profile is not an empty object before we try to render anything
@@ -32,14 +64,13 @@ class Dashboard extends Component {
           <div>
             <p className="lead text=muted">
               <Link to={`/profile/${profile.handle}`}>
-                Welcome, {user.name}{" "}
+                Welcome, {profile.firstName} {profile.lastName}
               </Link>
             </p>
             <ProfileActions />
-            {/* experience can be accessed from the profile state 
-            Pass the experience array to the Experience component so that the component can use it as a prop */}
-            <Experience experience={profile.experience} />
-            <Education education={profile.education} />
+            <Property property={profile.property} />
+            {/* <Education education={profile.education} /> */}
+            <Calculator profile={profile} />
             <div style={{ marginBottom: "60px" }} />
             <button
               onClick={this.onDeleteClick.bind(this)}

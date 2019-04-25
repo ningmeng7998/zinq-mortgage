@@ -11,7 +11,6 @@ class ProfileItem extends Component {
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">
-          {/* A bootstrap card which has three column */}
           <div className="col-2">
             <img src={profile.user.avatar} alt="" className="rounded-circle" />
           </div>
@@ -31,17 +30,6 @@ class ProfileItem extends Component {
             <Link to={`/profile/${profile.handle}`} className="btn btn-info">
               View Profile
             </Link>
-          </div>
-          <div className="col-md-4 d-none d-md-block">
-            <h4>Skill Set</h4>
-            <ul className="list-group">
-              {profile.skills.slice(0, 4).map((skill, index) => (
-                <li key={index} className="list-group-item">
-                  <i className="fa fa-check pr-1" />
-                  {skill}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>

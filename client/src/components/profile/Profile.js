@@ -43,7 +43,7 @@ class Profile extends Component {
           <ProfileAbout profile={profile} />
           <ProfileCreds
             education={profile.education}
-            experience={profile.experience}
+            property={profile.property}
           />
           {/* If the github username is filled, then it will show the git repo, otherwise, show nothing */}
           {profile.githubusername ? (
