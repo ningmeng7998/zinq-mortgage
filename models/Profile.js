@@ -51,13 +51,6 @@ const ProfileSchema = new Schema({
       }
     }
   ],
-  education: [
-    {
-      school: {
-        type: String
-      }
-    }
-  ],
   partner: {
     partnerIncome: {
       type: String

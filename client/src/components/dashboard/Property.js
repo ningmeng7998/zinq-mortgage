@@ -9,7 +9,6 @@ class Property extends Component {
   }
 
   render() {
-    //The property is passed in from Dashboard component (the profile state has the property array) as a prop
     const property = this.props.property.map(pro => (
       <tr key={pro._id}>
         <td>${pro.propertyValue}</td>
@@ -27,9 +26,7 @@ class Property extends Component {
     ));
     return (
       <div>
-        <h4 className="mb-4" style={{ color: "purple" }}>
-          Property Information
-        </h4>
+        <h4 className="mb-4">Property Information</h4>
         <table className="table">
           <thead>
             <tr>

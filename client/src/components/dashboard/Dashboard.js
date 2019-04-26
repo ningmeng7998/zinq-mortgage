@@ -6,7 +6,6 @@ import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
 import Property from "./Property";
-import Education from "./Education";
 import Calculator from "./Calculator";
 
 class Dashboard extends Component {
@@ -18,7 +17,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    //Make sure profile is not an empty object before we try to render anything
+    //Make sure profile is not an empty object before trying to render anything
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
@@ -31,11 +30,11 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <p className="lead text=muted">
+            <h1 className="lead text=muted">
               <Link to={`/profile/${profile.handle}`}>
                 Welcome, {profile.firstName} {profile.lastName}
               </Link>
-            </p>
+            </h1>
             <ProfileActions />
             <Property property={profile.property} />
             <div style={{ marginTop: "60px", marginBottom: "200px" }}>

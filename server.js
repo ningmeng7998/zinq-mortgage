@@ -6,7 +6,6 @@ const path = require("path");
 
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
-const posts = require("./routes/api/posts");
 
 const app = express();
 
@@ -36,7 +35,6 @@ require("./config/passport")(passport);
 //We want /api/users to go to users
 app.use("/api/users", users);
 app.use("/api/profile", profile);
-app.use("/api/posts", posts);
 
 //If none of the above endpoints being hit, look at the index.html in client
 //Server static assets if in production

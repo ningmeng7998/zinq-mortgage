@@ -27,17 +27,25 @@ export default class Calculator extends Component {
 
   findResult(x, y) {
     if (x <= 0.5 && y >= 0.2) {
-      return "Congratulations! We can help you. ";
+      return (
+        <div className="card card-body bg-info text-white mb-3">
+          Congratulations! We can help you.{" "}
+        </div>
+      );
     } else {
-      return "Please give us a call for further assistance. ";
+      return (
+        <div className="card card-body bg-info text-white mb-3">
+          Please give us a call for further assistance.{" "}
+        </div>
+      );
     }
   }
 
   render() {
     const { profile } = this.props;
     let output = "";
-    let propertyValue = 1;
-    let deposit = 0;
+    let totalPropertyValue = 1;
+    let totalDeposit = 0;
     let propertyRatio = 1;
     let income = profile.income ? profile.income : 0;
     let expenses = profile.expenses ? profile.expenses : 0;
@@ -57,25 +65,23 @@ export default class Calculator extends Component {
 
     if (profile.property.length === 0) {
       output = (
-        <h1 style={{ color: "red" }}>
-          Oops! Please add your property information for analysis.{" "}
-        </h1>
+        <div className="card card-body bg-info text-white mb-3">
+          <h1>Oops! Please add your property information for analysis. </h1>
+        </div>
       );
     } else {
       profile.property.map(property => {
-        propertyValue += property.propertyValue;
-        deposit += property.deposit;
+        totalPropertyValue += parseFloat(property.propertyValue);
+        totalDeposit += parseFloat(property.deposit);
       });
 
-      propertyRatio = deposit / propertyValue;
+      propertyRatio = totalDeposit / totalPropertyValue;
       output = <h1>{this.findResult(inToOutRatio, propertyRatio)}</h1>;
     }
 
     return (
       <div>
-        <h4 className="mb-4" style={{ color: "purple" }}>
-          Analysis Result
-        </h4>
+        <h4 className="mb-4">Analysis Result</h4>
         {output}
       </div>
     );

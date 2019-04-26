@@ -7,7 +7,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from "../actions/types";
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
-    //If it is successful, we want to redirect to login
+    //If it is successful redirect to login
     .then(res => history.push("/login"))
     .catch(err =>
       dispatch({
@@ -16,9 +16,7 @@ export const registerUser = (userData, history) => dispatch => {
       })
     );
 
-  //the action dispatch something to the reducer, simple return an object which must have a type
   return {
-    //You can just return the type alone, but most of the time you will need the data
     type: GET_ERRORS,
     payload: userData
   };

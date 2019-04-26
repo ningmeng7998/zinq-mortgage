@@ -2,7 +2,6 @@ import React, { Component } from "react";
 //If we want to redirect from an action, we need withRouter
 import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addProperty } from "../../actions/profileActions";
@@ -37,7 +36,7 @@ class AddProperty extends Component {
       deposit: this.state.deposit,
       postCode: this.state.postCode
     };
-    //Redirect --- this.props.history
+    //Redirect to previous page
     this.props.addProperty(expData, this.props.history);
   }
 

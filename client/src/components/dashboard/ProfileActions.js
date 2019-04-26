@@ -11,10 +11,6 @@ function ProfileActions() {
         <i className="fa fa-home text-info mr-1" />
         Add Property
       </Link>
-      {/* <Link to="/add-education" className="btn btn-light">
-        <i className="fas fa-graduation-cap text-info mr-1" />
-        Add Education
-      </Link> */}
     </div>
   );
 }
