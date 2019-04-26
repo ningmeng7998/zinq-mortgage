@@ -9,7 +9,7 @@ const profile = require("./routes/api/profile");
 
 const app = express();
 
-//Body parser middleware. It is used to extract the data out of the the request headers like the form data. Four different parser types: JSON, raw, Text, URL-encoded
+//Extract the data out of the the request headers
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -22,9 +22,6 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
-//set a simple route. Later will put the route in a different folder. Now it is for testing purpose
-//app.get("/", (req, res) => res.send("Hello"));
-
 // Passport middleware
 app.use(passport.initialize());
 
@@ -32,7 +29,6 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 //Use routes
-//We want /api/users to go to users
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 

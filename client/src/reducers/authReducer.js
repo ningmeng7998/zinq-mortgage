@@ -8,12 +8,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    //state is immutable, take the payload from the action, and put it in the user object, then add it to the state
-    // case XX:
-    //   return {
-    //     ...state,
-    //     user: state.user
-    //   };
     case SET_CURRENT_USER:
       return {
         ...state,

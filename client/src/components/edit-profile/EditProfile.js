@@ -38,7 +38,6 @@ class CreateProfile extends Component {
 
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
-
       profile.handle = !isEmpty(profile.handle) ? profile.handle : "";
       profile.dateOfBirth = !isEmpty(profile.dateOfBirth)
         ? profile.dateOfBirth

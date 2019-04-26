@@ -2,15 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-const InputGroup = ({
-  name,
-  placeholder,
-  value,
-  icon,
-  type,
-  error,
-  onChange
-}) => {
+const InputGroup = ({ name, placeholder, value, icon, error, onChange }) => {
   return (
     //margin bottom 3
     <div className="input-group mb-3">

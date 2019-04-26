@@ -24,6 +24,7 @@ class Property extends Component {
         </td>
       </tr>
     ));
+
     return (
       <div>
         <h4 className="mb-4">Property Information</h4>

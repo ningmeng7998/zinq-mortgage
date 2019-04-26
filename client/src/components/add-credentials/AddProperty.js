@@ -53,7 +53,6 @@ class AddProperty extends Component {
 
   render() {
     const { errors } = this.state;
-
     return (
       <div className="add-property">
         <div className="container">
